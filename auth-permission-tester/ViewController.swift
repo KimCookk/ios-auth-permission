@@ -8,6 +8,13 @@
 /* Info Setting
  Privacy - Location Always and When In Use Usage Description : 11.0 +
  Privacy - Location Always Usage Description : ~ 10.0
+ 
+ .requestAlwaysAuthorization()
+ .requestWhenInUseAuthorization()
+ Status : .notDetermined 상태에만 iOS 팝업 호출 그렇지 않은 경우 팝업이 호출되지 않음.
+ 
+ 
+ 
  */
 import UIKit
 import CoreLocation
@@ -106,6 +113,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         //locationManager.requestWhenInUseAuthorization()
         
         locationManager.requestAlwaysAuthorization()
+        // 앱이 실행되어 있는 동안 위치 권한 허용 백그라운드 + 포그라운드
     }
     
     @objc func tappedRequestWhenInUseLocationAuthButton(sender: UIButton) {
@@ -114,6 +122,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
             return
         }
         locationManager.requestWhenInUseAuthorization()
+        // 포그라운드 상태에만 위치 권한 허용
         
         //locationManager.requestAlwaysAuthorization()
     }
@@ -154,7 +163,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         }
     }
     
-    
+    // iOS - Settings 에서 권한이 변경되는 경우 앱이 실행 될 때, 및 Appear 호출됨.
     func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
         guard let locationAuthStatus = getStatus() else {
             print("locationAuthStatus is nil")
